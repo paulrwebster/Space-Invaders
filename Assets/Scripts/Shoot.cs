@@ -9,10 +9,7 @@ public class Shoot : MonoBehaviour
 
     private void Start()
     {
-        if (SystemInfo.deviceType != DeviceType.Handheld)
-        {
-            this.gameObject.SetActive(false);
-        }
+        
     }
 
     public void Fire()

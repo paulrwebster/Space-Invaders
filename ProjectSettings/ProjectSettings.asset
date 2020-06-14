@@ -565,11 +565,12 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Template_2D
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: D:\Local Documents\Unity 2D\Space_Invaders - Copy (2)\Space
+    Invaders\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 80d8cba94761d701
   metroApplicationDescription: Template_2D
   wsaImages: {}
   metroTileShortName: 
