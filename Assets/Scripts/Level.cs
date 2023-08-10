@@ -11,13 +11,23 @@ public class Level : MonoBehaviour
     [SerializeField] float GoesLikeStinkSpeed;
 
     SceneLoader sceneLoader;
+    GameStatus gameStatus;
 
     // Start is called before the first frame update
     void Start()
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
+        gameStatus = FindObjectOfType<GameStatus>();
         Statics.moveTime = NormalSpeed;
         Statics.paused = false;
+    }
+
+    void Awake()
+    {
+        gameStatus = FindObjectOfType<GameStatus>();
+        int i = PlayerPrefs.GetInt("ScoreCF", 0);
+        gameStatus.score_1 = i;
+        gameStatus.score1.text = i.ToString("000000");
     }
 
     // Update is called once per frame
@@ -36,7 +46,12 @@ public class Level : MonoBehaviour
         Debug.Log(InvaderCount);
         InvaderCount--;
         
-        if (InvaderCount <= 0) { sceneLoader.LoadNextScene();}
+        if (InvaderCount <= 0) 
+        {
+            gameStatus.setScoreCF();
+            sceneLoader.LoadNextScene();
+            //gameStatus.getScoreCF();
+        }
         SetMoveTime(InvaderCount);
     }
 
@@ -47,22 +62,6 @@ public class Level : MonoBehaviour
 
     void SetMoveTime(int invaderCount)
     {
-        //if(invaderCount <= 2) 
-        //{
-        //    Statics.moveTime = GoesLikeStinkSpeed;
-        //}
-        //else if (invaderCount <= 5 && invaderCount >= 3)
-        //{
-        //    Statics.moveTime = VeryFastSpeed;
-        //}
-        //else if (invaderCount < 12 && invaderCount >= 6)
-        //{
-        //    Statics.moveTime = FastSpeed;
-        //}
-        //else 
-        //{
-        //    Statics.moveTime = NormalSpeed;
-
         if (invaderCount <= 2)
         {
             Statics.moveTime = GoesLikeStinkSpeed;

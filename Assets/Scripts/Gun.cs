@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
- using UnityEngine;
+using System.Runtime.CompilerServices;
+using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float joystickMoveSpeed = 3f;
-    [SerializeField] float padding = 1f;
+    [SerializeField] float padding = 0.1f;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject touchLinePrefab;
     [SerializeField] float bulletSpeed = 15f;
@@ -30,6 +31,25 @@ public class Gun : MonoBehaviour
     
     public bool alreadyPlayed = false;
 
+    //New Input Manager
+    private Controls controls = null;
+
+    private void Awake()
+    {
+        controls = new Controls();
+    }
+
+    private void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.Disable();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,15 +68,17 @@ public class Gun : MonoBehaviour
 
         Move();
 
-        if (Input.GetButtonDown("Fire1"))
-        {
+        //Old input system
+
+        //if (Input.GetButtonDown("Fire1"))
+        //{
             
-            Fire();
-        }
-        else
-        {
-            SlideyTouch();
-        }
+        //    Fire();
+        //}
+        //else
+        //{
+        //    SlideyTouch();
+        //}
 
     }
 
@@ -68,27 +90,40 @@ public class Gun : MonoBehaviour
     {
 
         if (GameObject.FindWithTag("Bullet") is null)
-        {
-            //myAudioSource.PlayOneShot(shootSound);
-            SoundManager.Instance.Play(shootSound);
-            bulletInstance =
-            Instantiate(bulletPrefab, transform.position + new Vector3(0, bulletPadding, 0), Quaternion.identity)
-            as GameObject;
-            bulletInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
-        }
+            if (Statics.paused == false)
+            {
+                {
+                    //myAudioSource.PlayOneShot(shootSound);
+                    SoundManager.Instance.Play(shootSound);
+                    bulletInstance =
+                    Instantiate(bulletPrefab, transform.position + new Vector3(0, bulletPadding, 0), Quaternion.identity)
+                    as GameObject;
+                    bulletInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(0, bulletSpeed);
+                }
+            }
     }
 
 
 
     private void Move()
     {
+
+        //Old input system
         //deltaTime is the completion time in seconds since the last frame.So if it takes twice as long, we multiply 
         //to double the distance moved
         //GetAxis is set up in Edit- Project settings input. It is between  +1 and -1
-        var joystickDeltaX = joystick.Horizontal * Time.deltaTime * joystickMoveSpeed;
-        var deltaX = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed) + joystickDeltaX;
+        //var joystickDeltaX = joystick.Horizontal * Time.deltaTime * joystickMoveSpeed;
+        //var deltaX = (Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed) + joystickDeltaX;
+        //var newXPos = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
+        //transform.position = new Vector2(newXPos, transform.position.y);
+
+        //New input system
+        var movementInput = controls.Player.Move.ReadValue<Vector2>();
+
+        var deltaX = (movementInput.x * Time.deltaTime * moveSpeed);
         var newXPos = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
         transform.position = new Vector2(newXPos, transform.position.y);
+
     }
     //    private void TappyFire()
     //{
@@ -98,7 +133,7 @@ public class Gun : MonoBehaviour
     //    }
     //}
     
-      private void SlideyTouch()
+    /*  private void SlideyTouch()
     { 
         
 
@@ -150,7 +185,7 @@ public class Gun : MonoBehaviour
         } 
     }
     
-    
+    */
         
 
         private void SetUpMoveBoundaries()

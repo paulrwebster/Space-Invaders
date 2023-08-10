@@ -5,20 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
     public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        // if (currentSceneIndex <= 1)
-        // {
-        Debug.Log(currentSceneIndex);
+      
+        //Debug.Log(currentSceneIndex);
         //Statics.paused = false;
-
+        
         SceneManager.LoadScene(currentSceneIndex + 1);
-       // }
-       // else
-        //{ 
-        //    LoadStartScene();
-        //}
+        
+         if(SceneManager.GetSceneByBuildIndex(currentSceneIndex + 1).name == "GameOverScene")
+        {
+            GameStatus gameStatus;
+            gameStatus = FindObjectOfType<GameStatus>();
+            gameStatus.EndOfGame();
+        }
     }
 
     public void LoadStartScene()

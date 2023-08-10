@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9095080825059828862}
   - component: {fileID: 3394200994861472560}
   - component: {fileID: 3396173569604286888}
+  - component: {fileID: 2079016595}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Gun
@@ -97,12 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  padding: 0.1
+  joystickMoveSpeed: 3
+  padding: 2.3
   bulletPrefab: {fileID: 619018081123615356, guid: c733d6f69dbd958499c149468c5ede87,
+    type: 3}
+  touchLinePrefab: {fileID: 2369157825512237334, guid: 4aa1ed43437d1de419b64bc4a1abec73,
     type: 3}
   bulletSpeed: 10
   bulletPadding: 0.4
   shootSound: {fileID: 8300000, guid: 470123476ff97a24fbc707e456e24e7f, type: 3}
+  explodeSound: {fileID: 8300000, guid: f32d27fb27f6f294799f55cc7a0196be, type: 3}
+  joystick: {fileID: 0}
   alreadyPlayed: 0
 --- !u!82 &3394200994861472560
 AudioSource:
@@ -226,3 +232,53 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.22}
   m_EdgeRadius: 0
+--- !u!114 &2079016595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095080825059828861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: cd2a9152665047546afb8edf770a31e1,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9095080825059828862}
+        m_MethodName: Fire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6d0553d2-e6c5-4eb9-9c51-4d8ccb4e5974
+    m_ActionName: Player/Fire[/Keyboard/space,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cd42e620-b0af-4e71-81bd-bdbe2b7c7ceb
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/s,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Mouse/backButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

@@ -21,7 +21,7 @@ public class EnemyPathing : MonoBehaviour
     void Update()
     {
         Move();
-        Debug.Log("SAUCER MOVING");
+        //Debug.Log("SAUCER MOVING");
 
     }
 
@@ -32,9 +32,9 @@ public class EnemyPathing : MonoBehaviour
         
             var targetPosition = waypoints[waypointIndex].transform.position;
             targetPosition.z = 0f;
-            Debug.Log(transform.position);
-            Debug.Log(targetPosition);
-            Debug.Log(waypoints[waypointIndex].transform.position);
+            //Debug.Log(transform.position);
+            //Debug.Log(targetPosition);
+            //Debug.Log(waypoints[waypointIndex].transform.position);
             var movementThisFrame = moveSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
 

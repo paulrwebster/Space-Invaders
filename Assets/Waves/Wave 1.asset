@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   pathPrefab: {fileID: 5852605871804133547, guid: fd681335bc4e69640a4a62300a3d1638,
     type: 3}
-  timeBetweenSpawns: 0.5
+  timeBetweenSpawns: 0.05
   spawnRandomFactor: 0.3
   numberOfSaucers: 5
   moveSpeed: 2
